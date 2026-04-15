@@ -16,16 +16,24 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Setup Maven settings
-        uses: s4u/maven-settings-action@v3
-        with:
-          servers: |
-            [{
-              "id": "github",
-              "username": "${{ github.actor }}",
-              "password": "${{ secrets.GITHUB_TOKEN }}"
-            }]
-              
+      - name: Create Maven settings
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml << EOF
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${GITHUB_ACTOR}</username>
+                <password>${GITHUB_TOKEN}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+
       - name: Publish package
         run: mvn --batch-mode deploy
         env:
