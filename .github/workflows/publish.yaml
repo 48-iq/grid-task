@@ -15,9 +15,15 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
+          
+      - uses: s4u/maven-settings-action@v4.0.0
+        with:
+          servers: |
+            [{
+                "id": "sonatype-nexus-snapshots",
+                "username": "${{ secrets.SONATYPE_USERNAME }}",
+                "password": "${{ secrets.SONATYPE_PASSWORD }}"
+            }]
 
       - name: Publish package
         run: mvn --batch-mode deploy
