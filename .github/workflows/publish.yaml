@@ -15,6 +15,17 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+
+      - name: Setup Maven settings
+        uses: s4u/maven-settings-action@v3
+        with:
+          servers: |
+            [{
+              "id": "github",
+              "username": "${{ github.actor }}",
+              "password": "${{ secrets.GITHUB_TOKEN }}"
+            }]
+              
       - name: Publish package
         run: mvn --batch-mode deploy
         env:
