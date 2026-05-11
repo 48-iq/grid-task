@@ -10,6 +10,6 @@ import lombok.Data;
 @AllArgsConstructor
 @ResultData
 public class ResultDataExample {
-    private Long total;
+    private Integer total;
     private List<Integer> sequence;
 }

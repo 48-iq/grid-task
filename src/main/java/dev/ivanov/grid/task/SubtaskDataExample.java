@@ -8,8 +8,16 @@ import lombok.Getter;
 @SubtaskData
 @Getter
 public class SubtaskDataExample {
-    
-    private Long startSequence;
-    private Long endSequence;
+
+    private List<Integer> startSequence;
+
+    private Integer maxSequenceLength;
+
+    public SubtaskDataExample(
+            List<Integer> startSequence,
+            Integer maxSequenceLength) {
+        this.startSequence = startSequence;
+        this.maxSequenceLength = maxSequenceLength;
+    }
 
 }

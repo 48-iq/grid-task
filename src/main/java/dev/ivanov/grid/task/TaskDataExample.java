@@ -8,5 +8,10 @@ import lombok.Data;
 @TaskData
 @Data
 public class TaskDataExample {
+    
     private List<List<Integer>> matrix;
+
+    public TaskDataExample(List<List<Integer>> matrix) {
+        this.matrix = matrix;
+    }
 }
